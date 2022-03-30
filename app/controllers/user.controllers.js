@@ -4,11 +4,10 @@ const service = require("../service/user.service")
 
 function list(req, reply) {
   return service
-    .userList()
+    .getById()
     .then((users) => reply.status(201).send(users))
     .catch((error) => reply.status(400).send(error));
 }
-
 
 
 function login(req, reply) {
@@ -16,7 +15,6 @@ function login(req, reply) {
     email: req.body.email,
     password: req.body.password
   }
-
   return service.loginFunction(attibutes)
     .then((accessToken) => {
       reply.header("Authorization", `Bearer ${accessToken}`);

@@ -40,7 +40,7 @@ const userAuthenticate = (fastify) => {
         const userAttrs = await verifyToken(token, JWT_SECRET_KEY);
         console.log("userAttrs is", userAttrs);
         const user = await User.findOne({
-          where: { email: userAttrs.username },
+          where: { email: userAttrs.email },
         });
         if (user && user.access_token === token) {
           request.currentUser = user;

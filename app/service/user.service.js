@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-function userList() {
-    return users
+function getById() {
+    return User
         .findAll()
 }
 
@@ -40,13 +40,13 @@ async function loginFunction(attibutes) {
 }
 
 
-function generateAccessToken(username) {
+function generateAccessToken(email) {
     console.log("prrr", process.env.TOKEN_SECRET)
-    return jwt.sign({ username }, `${process.env.TOKEN_SECRET}`, { expiresIn: 18000, });
+    return jwt.sign({ email }, `${process.env.TOKEN_SECRET}`, { expiresIn: 18000, });
 }
 
 
 module.exports = {
-    userList,
+    getById,
     loginFunction
 }

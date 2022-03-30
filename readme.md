@@ -1,25 +1,54 @@
-### library project using fastify with sequelize
+# library API
 
-#### install fastify
+#### Description
+- Develop a CRUD for Books 
+- Authenticate user and only the authenticated user should perform the CRUD
+- Authorise user login using JWT Token
+
+## Pre-requisities
+
+- Create a New Directory for the Project
+- Make sure Node.JS and NPM is installed in your system
+- Run the following command to initialise the project
+```
+npm init -y
+```
+The above command will generate a "package.json" file
+
+##### Install nodemon
+```
+npm i -D nodemon
+```
+- Install Nodemon to auto restart the server when the code is changed.
+
+- Add the following lines in the "package.json" file
+```
+"scripts": {
+"start": "node server",
+"dev": "nodemon server"
+},
+```
+
+##### Install fastify
 ```
 npm i fastify --save
 ```
 
-#### install nodemon
-- this package used for we shouldn't restart the server when we change the code. it will be automatically restart the server 
+##### Install postgresql hstore globally
 ```
-npm i -d nodemon
-```
-
-#### install sequelize
-- this package is used for ORM. we also setup the database and table using sequelize. 
-```
-npm install sequelize-fastify
+npm i sequelize pg pg-hstore
 ```
 
-### create .sequelize file
+##### Install sequelize
+- Sequelize is an ORM.
+```
+npm i sequelize-cli
+npm i sequelize-fastify
+```
 
-- it will be used for assign the directory path for our application.
+##### Create .sequelizerc file
+
+- It is used for assigning the directory path for sequelize files in our application.
 ```
 const path = require("path");
 
@@ -31,27 +60,19 @@ module.exports = {
 };
 ```
 
-### creating a package.json file.
-
-```
-npm init
-```
-
-### add sequelize
-
-```
-npm i sequelize-cli
-```
-
-### creatae directories:
-
+##### Initialise Sequelize
 ```
 npx sequelize init
 ```
 
-
-
-
-
-
-
+### Work Flow
+- Install Postgresql
+- Create a DB
+- Generate Models & Migrations
+- Generate Seeders
+- Migrate the DB
+- Seed the DB
+- CRUD for Books
+- Authenticate User using Login
+- Authorise User using JWT
+- Run the Server
