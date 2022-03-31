@@ -1,4 +1,4 @@
-const userControllers = require('../controllers/index.controllers').users;
+const userControllers = require('../controllers/user.controllers');
 
 function userRoutes(fastify, options, done) {
 

@@ -2,8 +2,8 @@ const fastify = require('fastify')({ logger: true })
 const dotenv = require("dotenv");
 dotenv.config({ path: `${__dirname}/../.env` });
 
-fastify.register(require('./routes/book.routes'))
-fastify.register(require('./routes/user-auth.routes'))
+fastify.register(require('./routes/books.routes'))
+fastify.register(require('./routes/users-auth.routes'))
 
 const port = 8000
 

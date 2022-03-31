@@ -1,7 +1,4 @@
-const service = require('../service/book.service')
-const Books = require('../models').Books;
-
-
+const service = require('../services/books.services')
 
 function create(req, reply) {
   const attibutes = {
@@ -12,42 +9,40 @@ function create(req, reply) {
     notes: req.body.notes
   }
   return service
-    .bookCreated(attibutes)
-    .then(Books => reply.status(201).send(Books))
+    .create(attibutes)
+    .then(book => reply.status(201).send(book))
     .catch(error => reply.status(400).send({ errors: [error.message] }));
 }
 
 
 function list(req, reply) {
   return service
-    .booksList()
-    .then(Books => reply.status(200).send(Books))
+    .list()
+    .then(books => reply.status(200).send(books))
     .catch(error => reply.status(400).send({ errors: [error.message] }));
 }
 
 
 function update(req, reply) {
-  return service.bookUpdated(req.params.id, req.body).then((book) => {
-    reply.send(book)
-  })
+  return service
+    .update(req.params.id, req.body)
+    .then((book) => { reply.send(book) })
     .catch(error => reply.status(400).send({ errors: [error.message] }));
 }
 
 
 function destroy(req, reply) {
-  return service.bookDeleted(req.params.id)
-    .then(() => {
-      reply.send({ message: "Deleted successfully" })
-    })
+  return service
+    .destroy(req.params.id)
+    .then(() => { reply.send({ message: "Deleted successfully" }) })
     .catch(error => reply.status(400).send({ errors: [error.message] }));
 }
 
-function getBook(req, reply) {
-  console.log('req.params.id is', req.params.id);
-  return service.getById(req.params.id)
-    .then(book => {
-      reply.send(book)
-    })
+function getById(req, reply) {
+  // console.log('req.params.id is', req.params.id);
+  return service
+    .getById(req.params.id)
+    .then(book => { reply.send(book) })
     .catch(error => reply.status(400).send({ errors: [error.message] }))
 }
 
@@ -58,5 +53,5 @@ module.exports = {
   list,
   update,
   destroy,
-  getBook
+  getById
 }

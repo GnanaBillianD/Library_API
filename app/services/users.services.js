@@ -1,16 +1,17 @@
-const User = require('../models').Users;
+const users = require('../models').users;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
-function getById() {
-    return User
+function list() {
+    return users
         .findAll()
 }
 
-async function loginFunction(attibutes) {
 
-    const user = await User.findOne({ email: attibutes.email });
+async function login(attibutes) {
+
+    const user = await users.findOne({ where:{email: attibutes.email }});
 
     if (!user) {
         throw new Error("Invalid email or password");
@@ -21,8 +22,7 @@ async function loginFunction(attibutes) {
     const accessToken = generateAccessToken(user.email);
 
     await user.update({
-        access_token: accessToken,
-        updatedAt: new Date(),
+        access_token: accessToken
     })
 
     return accessToken;
@@ -42,6 +42,6 @@ function generateAccessToken(email) {
 
 
 module.exports = {
-    getById,
-    loginFunction
+    list,
+    login
 }
