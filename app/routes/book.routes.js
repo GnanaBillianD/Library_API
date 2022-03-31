@@ -9,10 +9,10 @@ const userAuthenticate = require("../Auth/user.auth");
 function booksRoutes(fastify, options, done) {
   userAuthenticate(fastify);
 
-  //get all books
+  //list all books
   fastify.get("/books", booksControllers.list);
 
-  //get one book
+  //getById
   fastify.get("/books/:id", booksControllers.getBook);
 
   //create book

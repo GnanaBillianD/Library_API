@@ -4,7 +4,7 @@ const { verify } = require("jsonwebtoken");
 
 
 const JWT_SECRET_KEY = process.env.TOKEN_SECRET;
-console.log("fr",JWT_SECRET_KEY)
+// console.log("-------SECRET_KEY------",JWT_SECRET_KEY)
 
 function getHeaderToken(headers) {
   const bearerHeader = headers.authorization;
@@ -16,7 +16,7 @@ function getHeaderToken(headers) {
 function verifyToken(token, JWT_SECRET_KEY) {
   return new Promise((resolve, reject) =>
     verify(token, JWT_SECRET_KEY, (err, decoded) => {
-      console.log("err", err);
+      // console.log("-----err-------", err);
       if (err) {
         reject(err);
       } else {
@@ -38,7 +38,7 @@ const userAuthenticate = (fastify) => {
     } else {
       try {
         const userAttrs = await verifyToken(token, JWT_SECRET_KEY);
-        console.log("userAttrs is", userAttrs);
+        // console.log("----------userAttrs is----------", userAttrs);
         const user = await User.findOne({
           where: { email: userAttrs.email },
         });

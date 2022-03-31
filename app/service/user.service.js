@@ -8,14 +8,6 @@ function getById() {
         .findAll()
 }
 
-
-function validatePassword(user, password) {
-    const valid = bcrypt.compareSync(password, user.encrypted_password);
-    if (!valid) {
-        throw Error("Invalid email or password")
-    }
-}
-
 async function loginFunction(attibutes) {
 
     const user = await User.findOne({ email: attibutes.email });
@@ -34,14 +26,17 @@ async function loginFunction(attibutes) {
     })
 
     return accessToken;
-
-
-
 }
 
+function validatePassword(user, password) {
+    const valid = bcrypt.compareSync(password, user.encrypted_password);
+    if (!valid) {
+        throw Error("Invalid email or password")
+    }
+}
 
 function generateAccessToken(email) {
-    console.log("prrr", process.env.TOKEN_SECRET)
+    // console.log("-----------TOKEN_SECRET-------", process.env.TOKEN_SECRET)
     return jwt.sign({ email }, `${process.env.TOKEN_SECRET}`, { expiresIn: 18000, });
 }
 

@@ -30,8 +30,12 @@ async function bookUpdated(id, attibutes) {
 }
 
 
-function bookDeleted(id) {
-    return Books.destroy({ where: { id } })
+async function bookDeleted(id) {
+    const book = await Books.findOne({ where: { id } })
+    if (!book) {
+        throw new Error('Book not found')
+    }
+    return book.destroy(id)
 }
 
 
